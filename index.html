@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayush's Special Proposal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: pink;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 30px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+        }
+        button {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.1s ease-in-out;
+            border-radius: 5px;
+            position: relative;
+            z-index: 1;
+        }
+        .yes {
+            background-color: green;
+            color: white;
+        }
+        .no {
+            background-color: red;
+            color: white;
+        }
+        #message {
+            display: none;
+            font-size: 1.5rem;
+            color: white;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            button {
+                font-size: 1rem;
+                padding: 8px 16px;
+            }
+            #message {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Ayush wants to know... Will you be my Valentine? 💖</h1>
+    <div class="buttons">
+        <button class="yes" onclick="showMessage()">Yes</button>
+        <button class="no">No</button>
+    </div>
+    <p id="message"></p>
+    
+    <script>
+        // Add click behavior for mobile
+        function moveButtonOnClick() {
+            let noButton = document.querySelector('.no');
+            let maxWidth = window.innerWidth - noButton.offsetWidth - 20;
+            let maxHeight = window.innerHeight - noButton.offsetHeight - 20;
+
+            let x = Math.random() * maxWidth;
+            let y = Math.random() * maxHeight;
+
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
+        }
+
+        // Add hover behavior for desktop
+        function moveButtonOnHover() {
+            let noButton = document.querySelector('.no');
+            let maxWidth = window.innerWidth - noButton.offsetWidth - 20;
+            let maxHeight = window.innerHeight - noButton.offsetHeight - 20;
+
+            let x = Math.random() * maxWidth;
+            let y = Math.random() * maxHeight;
+
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
+        }
+
+        // Show message when "Yes" is clicked
+        function showMessage() {
+            document.getElementById('message').innerText = "YAY! You said yes to Ayush! 🎉💖";
+            document.getElementById('message').style.display = 'block';
+        }
+
+        // Add event listeners based on device type
+        function setEventListeners() {
+            let noButton = document.querySelector('.no');
+            if (window.innerWidth <= 768) {
+                // For mobile: move button on click
+                noButton.removeEventListener('mouseover', moveButtonOnHover);
+                noButton.addEventListener('click', moveButtonOnClick);
+            } else {
+                // For PC: move button on hover
+                noButton.removeEventListener('click', moveButtonOnClick);
+                noButton.addEventListener('mouseover', moveButtonOnHover);
+            }
+        }
+
+        // Set event listeners on load and when resizing the window
+        window.onload = setEventListeners;
+        window.onresize = setEventListeners;
+    </script>
+</body>
+</html>
